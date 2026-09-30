@@ -1,0 +1,344 @@
+/* ==========================================================================
+   METRO 2033 — thème Obsidian
+   Direction artistique : tunnels de Moscou post-apocalyptique, éclairage
+   sodium/tungstène, rouille, suie, signalétique soviétique, carnet d'Artyom.
+   Installation : .obsidian/snippets/metro2033.css  (ou theme.css + manifest)
+   ========================================================================== */
+
+/* Polices optionnelles (nécessite Internet ; sinon les replis système servent) */
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Special+Elite&family=Share+Tech+Mono&family=Roboto+Condensed:wght@400;700&display=swap");
+
+:root {
+  /* Palette */
+  --m-soot:       #0f0e0d;   /* suie, fond principal */
+  --m-tunnel:     #171513;   /* béton sombre */
+  --m-concrete:   #22201d;   /* panneaux */
+  --m-steel:      #3a3631;   /* bordures métal */
+  --m-amber:      #e0952b;   /* lampe sodium */
+  --m-amber-hot:  #ffb84d;
+  --m-rust:       #a4441a;   /* rouille */
+  --m-rust-dark:  #5e2a12;
+  --m-blood:      #b3261e;   /* alerte / danger */
+  --m-geiger:     #a8c23a;   /* compteur Geiger */
+  --m-bone:       #d9cdb4;   /* texte, papier vieilli */
+  --m-ash:        #8f8677;
+
+  /* Polices */
+  --m-display: "Stencil", "Oswald", "Impact", "Arial Narrow", sans-serif;
+  --m-body:    "Roboto Condensed", "Segoe UI", Arial, sans-serif;
+  --m-diary:   "Special Elite", "Courier New", monospace;
+  --m-hud:     "Share Tech Mono", "Consolas", monospace;
+
+  /* Bande de danger réutilisable */
+  --m-hazard: repeating-linear-gradient(-45deg,
+              var(--m-amber) 0 8px, #141210 8px 16px);
+}
+
+/* ---------- Variables Obsidian (mode sombre = le tunnel) ---------- */
+.theme-dark {
+  --background-primary:        var(--m-tunnel);
+  --background-primary-alt:    var(--m-concrete);
+  --background-secondary:      var(--m-soot);
+  --background-secondary-alt:  #0b0a09;
+  --background-modifier-border: var(--m-steel);
+  --background-modifier-hover:  rgba(224, 149, 43, 0.10);
+  --background-modifier-active-hover: rgba(224, 149, 43, 0.18);
+  --text-normal:  var(--m-bone);
+  --text-muted:   var(--m-ash);
+  --text-faint:   #6a6357;
+  --text-accent:        var(--m-amber);
+  --text-accent-hover:  var(--m-amber-hot);
+  --text-selection:     rgba(224, 149, 43, 0.35);
+  --text-highlight-bg:  rgba(224, 149, 43, 0.30);
+  --interactive-accent:        var(--m-rust);
+  --interactive-accent-hover:  var(--m-amber);
+  --link-color:          var(--m-amber);
+  --link-color-hover:    var(--m-amber-hot);
+  --link-external-color: var(--m-geiger);
+  --link-unresolved-color: var(--m-rust);
+  --tag-color: var(--m-amber-hot);
+  --tag-background: rgba(164, 68, 26, 0.25);
+  --tag-border-color: var(--m-rust);
+  --code-background: #0c0b0a;
+  --code-normal: var(--m-geiger);
+  --blockquote-border-color: var(--m-rust);
+  --hr-color: var(--m-steel);
+  --checkbox-color: var(--m-geiger);
+  --scrollbar-thumb-bg: var(--m-rust-dark);
+  --scrollbar-active-thumb-bg: var(--m-rust);
+
+  --font-text-theme: var(--m-body);
+  --font-interface-theme: var(--m-body);
+  --font-monospace-theme: var(--m-hud);
+
+  --h1-color: var(--m-amber-hot);
+  --h2-color: var(--m-amber);
+  --h3-color: #c98424;
+  --h4-color: var(--m-rust);
+  --h5-color: var(--m-ash);
+  --h6-color: var(--m-ash);
+}
+
+/* ---------- Mode clair = le carnet d'Artyom (papier jauni) ---------- */
+.theme-light {
+  --background-primary:       #d8c9a3;
+  --background-primary-alt:   #cdbd94;
+  --background-secondary:     #bfae82;
+  --background-modifier-border: #8a7a55;
+  --text-normal: #241c12;
+  --text-muted:  #4d4130;
+  --text-accent: var(--m-rust);
+  --text-accent-hover: var(--m-blood);
+  --interactive-accent: var(--m-rust);
+  --font-text-theme: var(--m-diary);
+  --h1-color: var(--m-rust-dark);
+  --h2-color: var(--m-rust);
+  --h3-color: #6b3a1a;
+}
+
+/* ---------- Ambiance : vignette + grain de suie (100 % CSS, sans image externe) ---------- */
+.theme-dark::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.55) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.7  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Titres : signalétique de station ---------- */
+.markdown-preview-view h1, .markdown-source-view.mod-cm6 .cm-header-1,
+.inline-title {
+  font-family: var(--m-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 12px rgba(224, 149, 43, 0.45), 2px 2px 0 #000;
+}
+.markdown-preview-view h1 {
+  padding-bottom: 0.35em;
+  border-bottom: 6px solid transparent;
+  border-image: var(--m-hazard) 6;      /* bande hachurée jaune/noir */
+}
+.markdown-preview-view h2 {
+  font-family: var(--m-display);
+  letter-spacing: 0.04em;
+  padding-left: 0.5em;
+  border-left: 6px solid var(--m-rust);
+}
+.markdown-preview-view h3 { border-bottom: 1px solid var(--m-rust-dark); padding-bottom: 2px; }
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 { font-family: var(--m-hud); letter-spacing: 0.05em; }
+
+/* Vacillement de la lampe : un seul effet animé, sur le titre de note */
+@keyframes m-lamp {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.82; }
+  95% { opacity: 1; }
+  97% { opacity: 0.9; }
+}
+.inline-title { animation: m-lamp 7s infinite; }
+@media (prefers-reduced-motion: reduce) { .inline-title { animation: none; } }
+
+/* ---------- Texte & liens ---------- */
+.markdown-preview-view strong { color: #f0e3c4; }
+.markdown-preview-view em { color: var(--m-amber-hot); }
+.markdown-preview-view mark { color: #000; background: var(--m-amber); padding: 0 3px; }
+a, .internal-link { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover, .internal-link:hover { text-shadow: 0 0 8px rgba(255, 184, 77, 0.7); }
+.external-link { color: var(--m-geiger); }
+
+/* ---------- Citations = pages arrachées du journal ---------- */
+.markdown-preview-view blockquote {
+  font-family: var(--m-diary);
+  background: rgba(217, 205, 180, 0.05);
+  border-left: 4px solid var(--m-rust);
+  padding: 0.6em 1.1em;
+  color: var(--m-bone);
+}
+
+/* ---------- Code = écran de terminal / compteur Geiger ---------- */
+.markdown-preview-view pre,
+.markdown-source-view.mod-cm6 .cm-preview-code-block pre {
+  background: #0a0a09;
+  border: 1px solid var(--m-steel);
+  border-left: 4px solid var(--m-geiger);
+  border-radius: 2px;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.8);
+}
+code { font-family: var(--m-hud); color: var(--m-geiger); }
+.token.keyword  { color: var(--m-amber-hot); font-weight: bold; }
+.token.string   { color: var(--m-geiger); }
+.token.comment  { color: #5d574d; }
+.token.function { color: #d9683a; font-style: italic; }
+
+/* ---------- Tableaux = plaques métalliques ---------- */
+.markdown-preview-view table { border: 1px solid var(--m-steel); }
+.markdown-preview-view th {
+  background: var(--m-rust-dark);
+  color: var(--m-amber-hot);
+  font-family: var(--m-display);
+  letter-spacing: 0.05em;
+  border: 1px solid var(--m-steel);
+}
+.markdown-preview-view td { border: 1px solid var(--m-steel); }
+.markdown-preview-view tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+
+/* ---------- Séparateur & tâches ---------- */
+.markdown-preview-view hr { height: 6px; border: 0; background: var(--m-hazard); opacity: 0.7; }
+input[type="checkbox"]:checked {
+  background-color: var(--m-geiger);
+  border-color: var(--m-geiger);
+}
+.task-list-item.is-checked { color: var(--m-ash); }
+
+/* ---------- Tags = étiquettes tamponnées ---------- */
+a.tag {
+  font-family: var(--m-hud);
+  border: 1px solid var(--m-rust);
+  border-radius: 2px;
+  padding: 0 6px;
+}
+
+/* ---------- Callouts sur mesure : > [!radiation], [!filtre], [!danger], [!carnet] ---------- */
+.callout { border-radius: 2px; border-left: 5px solid rgb(var(--callout-color)); background: rgba(var(--callout-color), 0.09); }
+.callout-title { font-family: var(--m-display); letter-spacing: 0.04em; }
+.callout[data-callout="radiation"] { --callout-color: 168, 194, 58; --callout-icon: lucide-radiation; }
+.callout[data-callout="filtre"]    { --callout-color: 224, 149, 43; --callout-icon: lucide-timer; }
+.callout[data-callout="danger"]    { --callout-color: 179, 38, 30;  --callout-icon: lucide-skull; }
+.callout[data-callout="carnet"]    { --callout-color: 217, 205, 180; --callout-icon: lucide-book-open; }
+.callout[data-callout="carnet"] .callout-content { font-family: var(--m-diary); }
+.callout[data-callout="danger"] { border-image: var(--m-hazard) 1; border-left-width: 5px; }
+
+/* ---------- Interface : barre latérale, onglets, statut ---------- */
+.nav-file-title.is-active, .tree-item-self.is-active {
+  background: rgba(224, 149, 43, 0.14);
+  border-left: 3px solid var(--m-amber);
+  color: var(--m-amber-hot);
+}
+.workspace-tab-header.is-active { border-bottom: 2px solid var(--m-amber); }
+.workspace-tab-header.is-active .workspace-tab-header-inner-title { color: var(--m-amber-hot); }
+.status-bar {
+  font-family: var(--m-hud);
+  color: var(--m-geiger);
+  background: #0a0a09;
+  border-top: 1px solid var(--m-rust-dark);
+}
+progress, progress::-webkit-progress-bar { background: #0a0a09; border: 1px solid var(--m-steel); }
+progress::-webkit-progress-value { background: var(--m-geiger); }
+
+/* ---------- Boutons ---------- */
+button.mod-cta, .mod-cta {
+  background: var(--m-rust);
+  color: #fff;
+  font-family: var(--m-display);
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--m-amber) inset;
+}
+button.mod-cta:hover { background: var(--m-amber); color: #000; }
+
+/* ---------- Fenêtres (sélecteur de fichiers, palette, modales) : plaque rouillée rivetée ---------- */
+.modal, .prompt, .suggestion-container {
+  position: relative;
+  background:
+    radial-gradient(circle at 10px 10px, #6b5a40 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 10px) 10px, #6b5a40 0 2px, transparent 3px),
+    radial-gradient(circle at 10px calc(100% - 10px), #6b5a40 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - 10px), #6b5a40 0 2px, transparent 3px),
+    linear-gradient(135deg, #2a2019 0%, #1a1512 55%, #2b1a10 100%);
+  border: 2px solid var(--m-rust);
+  border-top: 6px solid transparent;
+  border-image: var(--m-hazard) 6 2 2 2;   /* bande de danger sur le haut */
+  border-radius: 0;
+  box-shadow: 0 0 22px rgba(164, 68, 26, 0.45), 0 10px 40px #000;
+  color: var(--m-bone);
+}
+.modal .modal-title, .prompt-instructions { font-family: var(--m-display); color: var(--m-amber-hot); }
+.prompt-input, .modal input[type="text"], .modal .input-text {
+  background: #0c0b0a;
+  border: 1px solid var(--m-rust);
+  color: var(--m-amber-hot);
+  font-family: var(--m-hud);
+  box-shadow: inset 0 0 8px #000;
+}
+.suggestion-item.is-selected { background: rgba(224, 149, 43, 0.18); color: var(--m-amber-hot); }
+.suggestion-item .suggestion-highlight { color: var(--m-geiger); }
+
+/* ---------- Barres de défilement & sélection ---------- */
+::-webkit-scrollbar-thumb { background: var(--m-rust-dark); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--m-rust); }
+::selection { background: rgba(224, 149, 43, 0.35); color: #fff; }
+
+/* ==========================================================================
+   PLUIE ACIDE — pluie radioactive verte, en CSS pur
+   Calque fixe par-dessus tout Obsidian, sous la vignette/grain (z-index 9999),
+   sans bloquer les clics.
+   Réglages : --rain-opacity (0 = désactivée), --rain-speed, --rain-color.
+   ========================================================================== */
+
+.theme-dark {
+  --rain-color: 138, 204, 72;   /* vert radioactif, un cran plus vert que --m-geiger */
+  --rain-opacity: 0.4;
+  --rain-speed: 1s;             /* durée d'un cycle : plus petit = pluie plus rapide */
+}
+
+.theme-dark::before {
+  content: "";
+  position: fixed;
+  inset: -25%;                  /* déborde pour que la rotation ne laisse aucun coin vide */
+  z-index: 9998;
+  pointer-events: none;
+  transform: rotate(12deg);     /* la pluie tombe en biais, vers le bas-gauche */
+  opacity: var(--rain-opacity);
+  background:
+    /* grosses gouttes (proches, rapides) */
+    radial-gradient(ellipse 1.3px 26px at 40px 60px,   rgba(var(--rain-color), .9) 30%, transparent),
+    radial-gradient(ellipse 1.3px 26px at 150px 200px, rgba(var(--rain-color), .9) 30%, transparent),
+    radial-gradient(ellipse 1.3px 26px at 260px 330px, rgba(var(--rain-color), .9) 30%, transparent),
+    radial-gradient(ellipse 1.3px 26px at 90px 370px,  rgba(var(--rain-color), .9) 30%, transparent),
+    radial-gradient(ellipse 1.3px 26px at 220px 20px,  rgba(var(--rain-color), .9) 30%, transparent),
+    /* gouttes moyennes */
+    radial-gradient(ellipse 1px 18px at 30px 40px,     rgba(var(--rain-color), .75) 30%, transparent),
+    radial-gradient(ellipse 1px 18px at 110px 140px,   rgba(var(--rain-color), .75) 30%, transparent),
+    radial-gradient(ellipse 1px 18px at 180px 230px,   rgba(var(--rain-color), .75) 30%, transparent),
+    radial-gradient(ellipse 1px 18px at 60px 250px,    rgba(var(--rain-color), .75) 30%, transparent),
+    radial-gradient(ellipse 1px 18px at 160px 70px,    rgba(var(--rain-color), .75) 30%, transparent),
+    /* fines gouttes lointaines (lentes) */
+    radial-gradient(ellipse 0.8px 12px at 20px 30px,   rgba(var(--rain-color), .6) 30%, transparent),
+    radial-gradient(ellipse 0.8px 12px at 80px 110px,  rgba(var(--rain-color), .6) 30%, transparent),
+    radial-gradient(ellipse 0.8px 12px at 130px 60px,  rgba(var(--rain-color), .6) 30%, transparent),
+    radial-gradient(ellipse 0.8px 12px at 50px 170px,  rgba(var(--rain-color), .6) 30%, transparent),
+    radial-gradient(ellipse 0.8px 12px at 120px 165px, rgba(var(--rain-color), .6) 30%, transparent);
+  background-size:
+    300px 380px, 300px 380px, 300px 380px, 300px 380px, 300px 380px,
+    220px 280px, 220px 280px, 220px 280px, 220px 280px, 220px 280px,
+    160px 200px, 160px 200px, 160px 200px, 160px 200px, 160px 200px;
+  background-repeat: repeat;
+  animation: m-acid-rain var(--rain-speed) linear infinite;
+}
+
+/* Chaque couche descend exactement de la hauteur de sa tuile : boucle sans saut.
+   Grosses gouttes = plus de distance dans le même temps = plus rapides (effet de profondeur). */
+@keyframes m-acid-rain {
+  from {
+    background-position:
+      0 0, 0 0, 0 0, 0 0, 0 0,
+      0 0, 0 0, 0 0, 0 0, 0 0,
+      0 0, 0 0, 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position:
+      0 380px, 0 380px, 0 380px, 0 380px, 0 380px,
+      0 280px, 0 280px, 0 280px, 0 280px, 0 280px,
+      0 200px, 0 200px, 0 200px, 0 200px, 0 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-dark::before { animation: none; }
+}

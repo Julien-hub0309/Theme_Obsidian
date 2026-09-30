@@ -1,0 +1,923 @@
+/* =========================================================
+   THE WITCHER — ÉCOLE DU LOUP  (v3)
+   Thème Obsidian, mode sombre uniquement.
+
+   Base : Kaer Morhen à la tombée de la nuit. Pierre froide,
+   acier gris-bleu, parchemin, or terni, rouge sang séché et
+   une seule lueur ambre : les yeux du loup.
+
+   Mécanismes repris et adaptés du thème Obsidianite
+   (Benny Guo, https://github.com/bennyxguo/Obsidian-Obsidianite) :
+   liens à soulignement plein, cases à cocher animées, tags
+   colorés par sujet, séparateur à glyphe central, citations
+   à filets dégradés, repères d'indentation, barre d'état
+   qui s'efface, pastille de langage sur les blocs de code.
+   Palette, typographie et symboles sont propres à The Witcher.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Uncial+Antiqua&family=Work+Sans:wght@400;500&display=swap');
+
+/* ---------------------------------------------------------
+   1. PALETTE & VARIABLES
+--------------------------------------------------------- */
+
+.theme-dark {
+    /* Pierre & acier */
+    --kaer-stone:       #0a0d11;
+    --kaer-stone-light: #141a20;
+    --steel-blue:       #1c2833;
+    --steel-mist:       #2b3945;
+    --steel-silver:     #b9c0c6;
+
+    /* Grimoire */
+    --parchment:        #d6cdb7;
+    --wolf-gold:        #c7b37a;
+    --wolf-gold-bright: #e2d29a;
+    --wolf-red:         #7a1a20;
+    --wolf-red-deep:    #3a0b0f;
+    --medallion-amber:  #d9a441;
+
+    /* Soulignements de liens (interne = argent, externe = sang) */
+    --bg-internal: rgba(185,192,198,.45);
+    --bg-external: rgba(150,34,42,.75);
+    --bg-gold-25:  rgba(199,179,122,.25);
+
+    /* Polices */
+    --font-title:   "Cinzel", "Trajan Pro", serif;
+    --font-initial: "Uncial Antiqua", "Cinzel", serif;
+    --font-text-theme:      "EB Garamond", "Georgia", serif;
+    --font-interface-theme: "Work Sans", -apple-system, "Segoe UI", sans-serif;
+    --font-monospace-theme: "Fira Code", "Cascadia Code", "Consolas", monospace;
+
+    --radius: 6px;
+    --shadow-soft:  0 8px 24px rgba(0,0,0,.65);
+    --shadow-inset: inset 0 0 14px rgba(0,0,0,.7);
+    --line-height-normal: 1.65;
+    --file-line-width: 46rem;
+
+    /* Fonds Obsidian */
+    --background-primary:      var(--kaer-stone);
+    --background-primary-alt:  #0b0f14;
+    --background-secondary:    #0e1319;
+    --background-secondary-alt:#0b0f14;
+    --background-modifier-border:       rgba(199,179,122,.16);
+    --background-modifier-border-hover: rgba(199,179,122,.34);
+    --background-modifier-border-focus: var(--wolf-gold);
+    --background-modifier-hover:        rgba(199,179,122,.08);
+    --background-modifier-active-hover: rgba(122,26,32,.28);
+    --background-modifier-box-shadow:   rgba(0,0,0,.8);
+    --divider-color: rgba(199,179,122,.18);
+
+    /* Texte */
+    --text-normal:  var(--parchment);
+    --text-muted:   #8d99a3;
+    --text-faint:   #5b6670;
+    --text-accent:       var(--wolf-gold);
+    --text-accent-hover: var(--wolf-gold-bright);
+    --text-on-accent:    #0a0d11;
+    --text-selection:    rgba(122,26,32,.55);
+    --text-highlight-bg: rgba(217,164,65,.28);
+
+    /* Accents & interface */
+    --interactive-accent:       var(--wolf-red);
+    --interactive-accent-hover: #93222a;
+    --interactive-normal:       var(--steel-blue);
+    --interactive-hover:        var(--steel-mist);
+
+    /* Liens */
+    --link-color:                 var(--parchment);
+    --link-color-hover:           #ffffff;
+    --link-decoration:            none;
+    --link-decoration-hover:      none;
+    --link-unresolved-color:      #8a7358;
+    --link-external-color:        var(--parchment);
+    --link-external-color-hover:  #ffffff;
+
+    /* Titres */
+    --h1-font: var(--font-title);  --h1-color: var(--wolf-gold-bright); --h1-size: 2em;    --h1-weight: 700; --h1-line-height: 1.25;
+    --h2-font: var(--font-title);  --h2-color: var(--wolf-gold);        --h2-size: 1.6em;  --h2-weight: 600;
+    --h3-font: var(--font-title);  --h3-color: var(--steel-silver);     --h3-size: 1.3em;  --h3-weight: 600;
+    --h4-font: var(--font-title);  --h4-color: var(--steel-silver);     --h4-size: 1.1em;  --h4-weight: 500;
+    --h5-font: var(--font-title);  --h5-color: var(--text-muted);       --h5-size: 1em;    --h5-weight: 500;
+    --h6-font: var(--font-title);  --h6-color: var(--text-faint);       --h6-size: 1em;    --h6-weight: 500;
+
+    /* Divers */
+    --hr-color: transparent;
+    --blockquote-border-color: var(--wolf-red);
+    --blockquote-background-color: transparent;
+    --blockquote-color: #bfb7a2;
+    --table-border-color: rgba(199,179,122,.18);
+    --table-header-background: rgba(0,0,0,.55);
+    --table-header-color: var(--steel-silver);
+    --tag-color: var(--wolf-gold);
+    --tag-background: rgba(199,179,122,.08);
+    --tag-border-color: rgba(199,179,122,.35);
+    --scrollbar-thumb-bg: rgba(199,179,122,.16);
+    --scrollbar-active-thumb-bg: rgba(199,179,122,.4);
+    --indentation-guide-color: rgba(199,179,122,.18);
+    --indentation-guide-color-active: rgba(199,179,122,.5);
+
+    /* Cases à cocher */
+    --checkbox-radius: 3px;
+    --checkbox-size: 18px;
+    --checkbox-color: var(--wolf-gold);
+    --checkbox-color-hover: var(--wolf-gold-bright);
+    --checkbox-border-color: var(--steel-silver);
+    --checkbox-marker-color: var(--kaer-stone);
+    --checklist-done-decoration: line-through;
+    --checklist-done-color: var(--text-faint);
+
+    /* Code : palette d'acier, de sang et d'or (éditeur + lecture) */
+    --code-background: #0d1218;
+    --code-normal:      #a9b4bd;
+    --code-comment:     #5f6f7c;
+    --code-function:    #d9c88f;
+    --code-important:   #d9a441;
+    --code-keyword:     #b8474e;
+    --code-operator:    #8ea3b3;
+    --code-property:    #8fb0c6;
+    --code-punctuation: #7c8994;
+    --code-string:      #a9b98a;
+    --code-tag:         #b8474e;
+    --code-value:       #d9a441;
+
+    /* Grain de pierre */
+    --stone-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.07'/></svg>");
+}
+
+/* ---------------------------------------------------------
+   2. FOND : PIERRE, BRUME, PÉNOMBRE
+--------------------------------------------------------- */
+
+.theme-dark .workspace-leaf-content[data-type="markdown"],
+.theme-dark .workspace-leaf-content[data-type="empty"] {
+    background:
+        var(--stone-grain),
+        radial-gradient(ellipse 70% 50% at 100% 0%, rgba(43,57,69,.55) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 45% at 0% 100%, rgba(122,26,32,.22) 0%, transparent 70%),
+        linear-gradient(170deg, var(--kaer-stone) 0%, #0d1319 55%, #10161d 100%);
+}
+
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-editor,
+.theme-dark .cm-scroller {
+    background: transparent;
+}
+
+.theme-dark .titlebar,
+.theme-dark .workspace-ribbon.is-collapsed {
+    background-color: var(--background-primary-alt);
+}
+
+.theme-dark .view-header {
+    background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0));
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.theme-dark .view-header-icon,
+.theme-dark .workspace-leaf.mod-active .view-header-title {
+    color: var(--wolf-gold);
+}
+
+.theme-dark .titlebar-text { color: var(--wolf-gold); }
+
+.theme-dark .notice {
+    background-color: var(--background-primary-alt);
+    color: var(--wolf-gold-bright);
+    border: 1px solid var(--background-modifier-border-hover);
+}
+
+/* Barres de défilement arrondies */
+::-webkit-scrollbar { width: .6rem; height: .6rem; }
+::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb-bg); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-active-thumb-bg); }
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece { background: var(--background-secondary); }
+
+/* ---------------------------------------------------------
+   3. BARRES LATÉRALES, ONGLETS, BARRE D'ÉTAT
+--------------------------------------------------------- */
+
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split,
+.theme-dark .workspace-ribbon {
+    background:
+        var(--stone-grain),
+        linear-gradient(180deg, #131a21 0%, #0c1116 100%);
+    box-shadow: var(--shadow-inset);
+}
+
+.theme-dark .nav-file-title,
+.theme-dark .nav-folder-title {
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    color: var(--text-muted);
+}
+
+body:not(.is-grabbing).theme-dark .nav-file-title:hover,
+body:not(.is-grabbing).theme-dark .nav-folder-title:hover {
+    color: var(--wolf-gold-bright);
+    background: var(--background-modifier-hover);
+    border-color: var(--background-modifier-border-hover);
+}
+
+.theme-dark .nav-file-title.is-active,
+.theme-dark .nav-folder-title.is-active {
+    color: var(--wolf-gold-bright);
+    background: linear-gradient(90deg, rgba(122,26,32,.35), rgba(122,26,32,0));
+    border-color: var(--bg-gold-25);
+    box-shadow: inset 2px 0 0 var(--wolf-gold);
+}
+
+.theme-dark .nav-folder-collapse-indicator { color: var(--wolf-gold); }
+
+/* Racine de l'arborescence */
+.theme-dark .nav-folder.mod-root > .nav-folder-title { color: var(--wolf-gold); }
+
+/* Médaillon du loup (dossiers) : anneau d'argent, œil ambre */
+.theme-dark .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 7px;
+    border-radius: 50%;
+    border: 1.5px solid var(--steel-silver);
+    background: radial-gradient(circle, var(--text-faint) 0 35%, transparent 40%);
+    vertical-align: -1px;
+}
+
+.theme-dark .nav-folder:not(.is-collapsed) > .nav-folder-title .nav-folder-title-content::before {
+    background: radial-gradient(circle, var(--medallion-amber) 0 35%, transparent 40%);
+    box-shadow: 0 0 6px rgba(217,164,65,.55);
+}
+
+/* Fichiers : rune losange */
+.theme-dark .nav-file-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 8px;
+    background: var(--wolf-red);
+    outline: 1px solid rgba(199,179,122,.4);
+    transform: rotate(45deg);
+    vertical-align: 1px;
+}
+
+.theme-dark .nav-file-title.is-active .nav-file-title-content::before { background: var(--medallion-amber); }
+
+/* Icônes du dock et onglets : discrets au repos, allumés au survol */
+.theme-dark .side-dock-ribbon-tab,
+.theme-dark .side-dock-ribbon-action,
+.theme-dark .workspace-ribbon-collapse-btn,
+.theme-dark .workspace-tab-header {
+    transition: all 350ms ease-in-out;
+    opacity: .55;
+    cursor: pointer;
+}
+
+.theme-dark .side-dock-ribbon-tab:hover,
+.theme-dark .side-dock-ribbon-action:hover,
+.theme-dark .workspace-ribbon-collapse-btn:hover,
+.theme-dark .workspace-tab-header:hover {
+    opacity: 1;
+    color: var(--wolf-gold-bright);
+}
+
+.theme-dark .workspace-tab-header.is-active {
+    opacity: 1;
+    color: var(--wolf-gold-bright);
+    box-shadow: inset 0 -2px 0 var(--wolf-gold);
+}
+
+/* Barre d'état : s'efface jusqu'au survol */
+.theme-dark .status-bar {
+    background: #090c10;
+    border-top: 1px solid var(--divider-color);
+    border-top-left-radius: 8px;
+    color: var(--text-faint);
+    opacity: .4;
+    transition: opacity .5s;
+}
+
+.theme-dark .status-bar:hover { opacity: 1; transition: opacity .2s; }
+
+/* ---------------------------------------------------------
+   4. TEXTE & TITRES : le grimoire
+--------------------------------------------------------- */
+
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-s-obsidian {
+    font-family: var(--font-text-theme);
+    font-size: 1.12em;
+}
+
+.theme-dark .markdown-rendered h1,
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4,
+.theme-dark .markdown-rendered h5,
+.theme-dark .markdown-rendered h6 {
+    letter-spacing: .06em;
+    text-shadow: 0 2px 10px rgba(0,0,0,.9);
+}
+
+/* H1 : filet d'or qui s'estompe */
+.theme-dark .markdown-rendered h1 {
+    padding-bottom: .35em;
+    margin-bottom: .7em;
+    background: linear-gradient(90deg, var(--wolf-gold) 0%, rgba(199,179,122,0) 85%) bottom / 100% 1px no-repeat;
+}
+
+/* H2 à H6 : filet rouge sang qui s'estompe vers la pierre */
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4,
+.theme-dark .markdown-rendered h5,
+.theme-dark .markdown-rendered h6,
+.theme-dark .HyperMD-header.HyperMD-header-2,
+.theme-dark .HyperMD-header.HyperMD-header-3,
+.theme-dark .HyperMD-header.HyperMD-header-4,
+.theme-dark .HyperMD-header.HyperMD-header-5,
+.theme-dark .HyperMD-header.HyperMD-header-6 {
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, var(--wolf-red), rgba(10,13,17,0) 65%);
+}
+
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4 {
+    padding-bottom: .25em;
+}
+
+/* Signes # discrets en édition */
+.theme-dark .cm-formatting.cm-formatting-header.cm-header {
+    color: var(--wolf-gold);
+    opacity: .45;
+}
+
+/* Lettrine enluminée : le grand geste décoratif du thème */
+.theme-dark .markdown-preview-view .el-h1 + .el-p > p::first-letter {
+    font-family: var(--font-initial);
+    font-size: 3.3em;
+    float: left;
+    line-height: .85;
+    padding: .06em .12em 0 0;
+    color: var(--wolf-gold);
+    text-shadow: 0 0 14px rgba(217,164,65,.25);
+}
+
+/* Gras : dégradé argent → or, comme une lame polie */
+.theme-dark strong,
+.theme-dark .cm-strong {
+    font-weight: 600;
+    color: var(--wolf-gold-bright);
+    background-image: linear-gradient(62deg, var(--steel-silver) 0%, var(--wolf-gold-bright) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.theme-dark strong kbd,
+.theme-dark .cm-strong kbd { -webkit-text-fill-color: initial; }
+
+/* Italique : brume d'acier */
+.theme-dark em,
+.theme-dark .cm-em { color: #c9d3db; }
+
+.theme-dark mark,
+.theme-dark .cm-s-obsidian span.cm-highlight {
+    background: linear-gradient(transparent 55%, rgba(217,164,65,.35) 55%);
+    color: inherit;
+}
+
+/* Séparateur : filet d'acier et éclat central */
+.theme-dark .markdown-rendered hr,
+.theme-dark .cm-line hr {
+    position: relative;
+    height: 0;
+    margin-block: 3em;
+    border: none;
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, transparent, var(--steel-silver), transparent);
+}
+
+.theme-dark .markdown-rendered hr::after,
+.theme-dark .cm-line hr::after {
+    content: "✦";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    padding: 0 .6rem;
+    color: var(--medallion-amber);
+    background-color: #0d1319;
+    font-size: .9rem;
+}
+
+/* ---------------------------------------------------------
+   5. LIENS : soulignement plein qui se remplit au survol
+--------------------------------------------------------- */
+
+.theme-dark .markdown-rendered a.internal-link,
+.theme-dark .markdown-rendered a.external-link,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
+    color: var(--text-normal);
+    -webkit-text-fill-color: var(--text-normal);
+    text-decoration: none;
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    background-size: 5px 5px;
+    transition: background 350ms ease-in-out;
+}
+
+.theme-dark .markdown-rendered a.internal-link,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline {
+    background-image: linear-gradient(var(--bg-internal), var(--bg-internal));
+}
+
+.theme-dark .markdown-rendered a.external-link,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
+    background-image: linear-gradient(var(--bg-external), var(--bg-external));
+}
+
+.theme-dark .markdown-rendered a.internal-link:hover,
+.theme-dark .markdown-rendered a.external-link:hover,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline:hover,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline:hover {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    background-size: 4px 50px;
+}
+
+.theme-dark .markdown-rendered a.internal-link.is-unresolved { opacity: .7; }
+
+/* Marques de syntaxe atténuées en édition */
+.theme-dark .cm-s-obsidian span.cm-formatting-link { color: var(--text-faint) !important; opacity: .3; }
+.theme-dark .cm-url { color: var(--text-faint) !important; opacity: .45; }
+.theme-dark .cm-formatting-image { color: var(--wolf-gold) !important; opacity: .7; }
+
+/* ---------------------------------------------------------
+   6. TAGS : un sceau de couleur par sujet
+   Utilise #contrat, #bestiaire, #alchimie, #signes, #lore, #quete
+   (les équivalents Obsidianite #todo, #notes… restent valables).
+--------------------------------------------------------- */
+
+.theme-dark a.tag {
+    font-family: var(--font-text-theme);
+    font-style: italic;
+    font-size: .9rem;
+    font-weight: 500;
+    border-radius: 3px;
+    padding: .05em .6em;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.theme-dark a.tag:hover {
+    border-color: var(--wolf-gold);
+    color: var(--wolf-gold-bright);
+    text-decoration: underline;
+    text-decoration-color: var(--wolf-gold);
+}
+
+.theme-dark h1 a.tag, .theme-dark h2 a.tag, .theme-dark h3 a.tag,
+.theme-dark h4 a.tag, .theme-dark h5 a.tag, .theme-dark h6 a.tag { font-size: inherit; }
+
+/* Contrat / à faire : sang */
+a.tag[href*='#contrat'], a.tag[href*='#todo'] { background-color: #7a1a20; border-color: #93222a; color: #f1e6d0; }
+.cm-s-obsidian span.cm-tag-contrat:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-todo:not(.cm-formatting-hashtag) { color: #d0666d; }
+
+/* Quête en cours : Yrden */
+a.tag[href*='#quete'], a.tag[href*='#working-draft'] { background-color: #43336b; border-color: #5b4a8a; color: #eadff7; }
+.cm-s-obsidian span.cm-tag-quete:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-working-draft:not(.cm-formatting-hashtag) { color: #a996d6; }
+
+/* Alchimie / notes : Axii */
+a.tag[href*='#alchimie'], a.tag[href*='#notes'] { background-color: #2f5a3d; border-color: #437a55; color: #e4f0e6; }
+.cm-s-obsidian span.cm-tag-alchimie:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-notes:not(.cm-formatting-hashtag) { color: #7fbf92; }
+
+/* Signes / savoir : Aard */
+a.tag[href*='#signes'], a.tag[href*='#knowledge'] { background-color: #234863; border-color: #35678a; color: #e2eef7; }
+.cm-s-obsidian span.cm-tag-signes:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-knowledge:not(.cm-formatting-hashtag) { color: #7cb3d9; }
+
+/* Bestiaire / écriture : Igni */
+a.tag[href*='#bestiaire'], a.tag[href*='#writing'] { background-color: #8a4a1f; border-color: #b0602b; color: #fbeadb; }
+.cm-s-obsidian span.cm-tag-bestiaire:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-writing:not(.cm-formatting-hashtag) { color: #e08a4d; }
+
+/* Lore / idées : Quen */
+a.tag[href*='#lore'], a.tag[href*='#ideas'] { background-color: #d4a93f; border-color: #e3bd5c; color: #1a1408; }
+.cm-s-obsidian span.cm-tag-lore:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-ideas:not(.cm-formatting-hashtag) { color: #e8c76a; }
+
+.cm-s-obsidian span.cm-hashtag { font-style: italic; }
+.cm-s-obsidian span.cm-formatting-hashtag { color: var(--text-faint); }
+
+/* ---------------------------------------------------------
+   7. LISTES & CASES À COCHER
+--------------------------------------------------------- */
+
+.theme-dark .cm-s-obsidian span.cm-formatting-list { color: var(--wolf-gold); }
+
+.theme-dark .markdown-source-view.mod-cm6 .cm-indent::before,
+.theme-dark .markdown-source-view.mod-cm6 .cm-active-indent::before { transition: opacity 400ms ease-in-out; }
+
+.theme-dark .list-bullet::after { background-color: var(--wolf-gold); }
+.theme-dark .markdown-rendered ul > li::marker,
+.theme-dark .markdown-rendered ol > li::marker { color: var(--wolf-gold); }
+
+/* Case cochée : remplissage or et petit rebond */
+.theme-dark input[type="checkbox"]:checked {
+    animation: witcher-pop 300ms ease-out;
+    box-shadow: 0 0 8px rgba(199,179,122,.4);
+}
+
+@keyframes witcher-pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(.82); }
+    100% { transform: scale(1); }
+}
+
+/* ---------------------------------------------------------
+   8. CITATIONS : parchemin encadré de filets
+--------------------------------------------------------- */
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote,
+.theme-dark .markdown-rendered blockquote {
+    position: relative;
+    padding: 1rem 2rem 1rem 3rem;
+    margin-bottom: 1.6em;
+    font-style: italic;
+    border: none;
+    border-left: 3px solid var(--wolf-red);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: linear-gradient(135deg, rgba(122,26,32,.12), rgba(10,13,17,.7));
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote::before,
+.theme-dark .markdown-rendered blockquote::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 60%;
+    background: linear-gradient(90deg, rgba(199,179,122,.6), transparent);
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote::after,
+.theme-dark .markdown-rendered blockquote::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 25%;
+    background: linear-gradient(90deg, rgba(199,179,122,.6), transparent);
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote + .HyperMD-quote::before,
+.theme-dark .HyperMD-quote.HyperMD-quote-2::before,
+.theme-dark .HyperMD-quote.HyperMD-quote-3::before { display: none; }
+
+/* Guillemet enluminé en marge */
+.theme-dark .markdown-rendered blockquote p:first-of-type { position: relative; }
+.theme-dark .markdown-rendered blockquote p:first-of-type::before {
+    content: "\201C";
+    position: absolute;
+    top: -.15rem;
+    left: -2rem;
+    font-family: var(--font-initial);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--wolf-gold);
+}
+
+/* ---------------------------------------------------------
+   9. TABLEAUX, CODE
+--------------------------------------------------------- */
+
+.theme-dark .markdown-preview-view table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--table-border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: rgba(10,16,24,.75);
+    box-shadow: var(--shadow-soft);
+}
+
+.theme-dark .markdown-preview-view th {
+    font-family: var(--font-title);
+    letter-spacing: .06em;
+    color: var(--steel-silver);
+    background: var(--table-header-background);
+    border-bottom: 1px solid var(--wolf-gold);
+}
+
+.theme-dark .markdown-preview-view td { border-color: rgba(199,179,122,.1); }
+.theme-dark .markdown-preview-view tbody tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+.theme-dark .markdown-rendered pre {
+    position: relative;
+    border: 1px solid var(--divider-color);
+    border-left: 3px solid var(--steel-mist);
+    border-radius: var(--radius);
+}
+
+.theme-dark .markdown-rendered :not(pre) > code,
+.theme-dark .cm-s-obsidian span.cm-inline-code {
+    border-radius: 3px;
+    padding: 0 5px;
+    background-color: rgba(199,179,122,.06);
+    color: var(--code-property);
+}
+
+.theme-dark .markdown-rendered img { border-radius: 8px; }
+
+/* Pastille de langage en haut à droite des blocs de code */
+.theme-dark pre[class*="language-"]::before {
+    content: "";
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+    z-index: 10;
+    padding: .1em .8em;
+    border-radius: 8px;
+    background: rgba(10,13,17,.9);
+    border: 1px solid var(--divider-color);
+    color: var(--wolf-gold);
+    font-family: var(--font-title);
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+pre[class$="javascript"]::before, pre[class$="js"]::before   { content: "JavaScript"; }
+pre[class$="typescript"]::before, pre[class$="ts"]::before   { content: "TypeScript"; }
+pre[class$="python"]::before   { content: "Python"; }
+pre[class$="html"]::before     { content: "HTML"; }
+pre[class$="css"]::before      { content: "CSS"; }
+pre[class$="json"]::before     { content: "JSON"; }
+pre[class$="shell"]::before, pre[class$="bash"]::before { content: "Shell"; }
+pre[class$="yaml"]::before     { content: "YAML"; }
+
+/* Front-matter (propriétés) */
+.theme-dark .cm-s-obsidian span.cm-def,
+.theme-dark .cm-s-obsidian span.cm-atom { color: var(--text-faint); }
+.theme-dark .cm-s-obsidian span.cm-meta { color: var(--wolf-gold); }
+.theme-dark .cm-s-obsidian span.cm-string { color: var(--code-string); }
+
+/* ---------------------------------------------------------
+   10. CALLOUTS : Signes, bestiaire, contrats
+   Usage : > [!igni] Titre   /   > [!bestiary] Noyeur
+--------------------------------------------------------- */
+
+.theme-dark .callout {
+    --callout-border-width: 1px;
+    --callout-border-opacity: .3;
+    --callout-padding: .8em 1em;
+    --callout-radius: var(--radius);
+    --callout-title-padding: 0 0 .3em;
+    border-left: 3px solid rgb(var(--callout-color));
+    background-color: rgba(var(--callout-color), .07);
+    box-shadow: var(--shadow-soft);
+}
+
+.theme-dark .callout-title {
+    font-family: var(--font-title);
+    letter-spacing: .05em;
+}
+
+/* Les cinq Signes */
+.callout[data-callout="aard"]   { --callout-color: 108,160,205; --callout-icon: lucide-wind; }
+.callout[data-callout="igni"]   { --callout-color: 214,110,50;  --callout-icon: lucide-flame; }
+.callout[data-callout="yrden"]  { --callout-color: 150,110,200; --callout-icon: lucide-hexagon; }
+.callout[data-callout="quen"]   { --callout-color: 218,176,70;  --callout-icon: lucide-shield; }
+.callout[data-callout="axii"]   { --callout-color: 120,170,110; --callout-icon: lucide-eye; }
+
+/* Carnet du sorceleur */
+.callout[data-callout="bestiary"] { --callout-color: 170,45,52;   --callout-icon: lucide-skull; }
+.callout[data-callout="contract"] { --callout-color: 199,179,122; --callout-icon: lucide-scroll; }
+.callout[data-callout="alchemy"]  { --callout-color: 90,160,130;  --callout-icon: lucide-flask-conical; }
+
+/* Callouts natifs recolorés */
+.callout[data-callout="note"],
+.callout[data-callout="info"]    { --callout-color: 108,160,205; }
+.callout[data-callout="tip"]     { --callout-color: 199,179,122; }
+.callout[data-callout="warning"] { --callout-color: 214,140,50; }
+.callout[data-callout="danger"],
+.callout[data-callout="bug"]     { --callout-color: 170,45,52; }
+.callout[data-callout="quote"]   { --callout-color: 140,150,160; }
+
+/* ---------------------------------------------------------
+   11. BOUTONS, MENUS, MODALES
+--------------------------------------------------------- */
+
+.theme-dark button.mod-cta {
+    font-family: var(--font-title);
+    letter-spacing: .05em;
+    border: 1px solid var(--wolf-gold);
+    background: linear-gradient(180deg, var(--wolf-red), var(--wolf-red-deep));
+    color: var(--wolf-gold-bright);
+}
+
+.theme-dark .checkbox-container.is-enabled { background-color: var(--wolf-red); }
+
+.theme-dark .modal,
+.theme-dark .menu,
+.theme-dark .prompt,
+.theme-dark .suggestion-container {
+    background: var(--stone-grain), linear-gradient(180deg, #131a21, #0c1116);
+    border: 1px solid var(--background-modifier-border-hover);
+    box-shadow: var(--shadow-soft);
+}
+
+.theme-dark .suggestion-item.is-selected {
+    background: rgba(122,26,32,.4);
+    color: var(--wolf-gold-bright);
+}
+
+.theme-dark .pane-list-item:hover .pane-list-item-ending-flair {
+    background-color: var(--background-secondary);
+    color: var(--wolf-gold);
+}
+
+/* ---------------------------------------------------------
+   12. FINITIONS
+--------------------------------------------------------- */
+
+::selection { background: rgba(122,26,32,.6); color: #fff; }
+
+.theme-dark :focus-visible {
+    outline: 1px solid var(--wolf-gold);
+    outline-offset: 1px;
+}
+
+/* Réduction des animations à la demande du système */
+@media (prefers-reduced-motion: reduce) {
+    .theme-dark * { animation: none !important; transition: none !important; }
+}
+
+
+/* ---------------------------------------------------------
+   13. DÉGRADÉS DE BOÎTES
+   Zone principale : noir -> rouge sang
+   Zones latérales : noir -> argent
+   Les dégradés sont posés sur les CONTENEURS (.workspace-split),
+   et tout ce qui les recouvre (onglets, vues, explorateur de
+   fichiers) est rendu transparent : c'est ce qui empêchait le
+   dégradé de s'afficher, Obsidian peint ces éléments en opaque.
+   Ajuste les couleurs de fin pour régler l'intensité.
+--------------------------------------------------------- */
+
+.theme-dark {
+    --main-grad-start: #050608;   /* noir */
+    --main-grad-mid:   #12080a;
+    --main-grad-end:   #4a1217;   /* rouge sang sombre */
+
+    --side-grad-start: #050608;   /* noir */
+    --side-grad-mid:   #0f1317;
+    --side-grad-end:   #3c444b;   /* argent sombre */
+
+    --tab-container-background: transparent;
+}
+
+/* --- Boîte principale : noir -> rouge --- */
+.theme-dark .workspace-split.mod-root {
+    background:
+        var(--stone-grain),
+        linear-gradient(160deg,
+            var(--main-grad-start) 0%,
+            var(--main-grad-start) 55%,
+            var(--main-grad-mid) 80%,
+            var(--main-grad-end) 100%) !important;
+}
+
+.theme-dark .workspace-split.mod-root .workspace-tabs,
+.theme-dark .workspace-split.mod-root .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-root .workspace-leaf,
+.theme-dark .workspace-split.mod-root .workspace-leaf-content,
+.theme-dark .workspace-split.mod-root .view-content,
+.theme-dark .workspace-split.mod-root .markdown-reading-view,
+.theme-dark .workspace-split.mod-root .markdown-source-view,
+.theme-dark .workspace-split.mod-root .markdown-preview-view,
+.theme-dark .workspace-split.mod-root .cm-editor,
+.theme-dark .workspace-split.mod-root .cm-scroller {
+    background: transparent !important;
+}
+
+/* --- Boîtes secondaires : noir -> argent --- */
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split,
+.theme-dark .workspace-ribbon {
+    background:
+        var(--stone-grain),
+        linear-gradient(180deg,
+            var(--side-grad-start) 0%,
+            var(--side-grad-start) 60%,
+            var(--side-grad-mid) 82%,
+            var(--side-grad-end) 100%) !important;
+}
+
+.theme-dark .workspace-split.mod-left-split .workspace-tabs,
+.theme-dark .workspace-split.mod-left-split .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-left-split .workspace-leaf,
+.theme-dark .workspace-split.mod-left-split .workspace-leaf-content,
+.theme-dark .workspace-split.mod-left-split .view-content,
+.theme-dark .workspace-split.mod-left-split .nav-files-container,
+.theme-dark .workspace-split.mod-left-split .nav-header,
+.theme-dark .workspace-split.mod-right-split .workspace-tabs,
+.theme-dark .workspace-split.mod-right-split .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-right-split .workspace-leaf,
+.theme-dark .workspace-split.mod-right-split .workspace-leaf-content,
+.theme-dark .workspace-split.mod-right-split .view-content,
+.theme-dark .workspace-sidedock-vault-profile,
+.theme-dark .workspace-drawer-vault-actions {
+    background: transparent !important;
+}
+
+.theme-dark .workspace-sidedock-vault-profile {
+    border-top: 1px solid var(--divider-color);
+}
+
+/* ---------------------------------------------------------
+   14. NEIGE
+   Chute de neige en CSS pur sur la zone principale : trois couches
+   de flocons (gros/rapides -> petits/lents) pour l'effet de profondeur.
+   Aucun script, ne bloque pas les clics.
+   Réglages : --snow-opacity (0 = désactivée), --snow-speed (durée).
+--------------------------------------------------------- */
+
+.theme-dark {
+    --snow-color: 226, 234, 242;
+    --snow-opacity: .75;
+    --snow-speed: 22s;
+}
+
+.theme-dark .workspace-split.mod-root {
+    position: relative;
+}
+
+.theme-dark .workspace-split.mod-root::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    opacity: var(--snow-opacity);
+    background:
+        /* gros flocons */
+        radial-gradient(circle 2.6px at 40px 60px,   rgba(var(--snow-color), .9) 40%, transparent),
+        radial-gradient(circle 2.6px at 150px 200px, rgba(var(--snow-color), .9) 40%, transparent),
+        radial-gradient(circle 2.6px at 260px 330px, rgba(var(--snow-color), .9) 40%, transparent),
+        radial-gradient(circle 2.6px at 90px 385px,  rgba(var(--snow-color), .9) 40%, transparent),
+        radial-gradient(circle 2.6px at 220px 30px,  rgba(var(--snow-color), .9) 40%, transparent),
+        /* flocons moyens */
+        radial-gradient(circle 1.8px at 30px 40px,   rgba(var(--snow-color), .75) 40%, transparent),
+        radial-gradient(circle 1.8px at 120px 150px, rgba(var(--snow-color), .75) 40%, transparent),
+        radial-gradient(circle 1.8px at 200px 250px, rgba(var(--snow-color), .75) 40%, transparent),
+        radial-gradient(circle 1.8px at 70px 265px,  rgba(var(--snow-color), .75) 40%, transparent),
+        radial-gradient(circle 1.8px at 180px 90px,  rgba(var(--snow-color), .75) 40%, transparent),
+        /* petits flocons lointains */
+        radial-gradient(circle 1.2px at 20px 30px,   rgba(var(--snow-color), .55) 40%, transparent),
+        radial-gradient(circle 1.2px at 90px 120px,  rgba(var(--snow-color), .55) 40%, transparent),
+        radial-gradient(circle 1.2px at 150px 60px,  rgba(var(--snow-color), .55) 40%, transparent),
+        radial-gradient(circle 1.2px at 60px 170px,  rgba(var(--snow-color), .55) 40%, transparent),
+        radial-gradient(circle 1.2px at 140px 180px, rgba(var(--snow-color), .55) 40%, transparent);
+    background-size:
+        320px 420px, 320px 420px, 320px 420px, 320px 420px, 320px 420px,
+        240px 300px, 240px 300px, 240px 300px, 240px 300px, 240px 300px,
+        180px 200px, 180px 200px, 180px 200px, 180px 200px, 180px 200px;
+    background-repeat: repeat;
+    animation: witcher-snow var(--snow-speed) linear infinite;
+}
+
+/* Chaque couche descend d'exactement la hauteur de sa tuile : boucle sans saut */
+@keyframes witcher-snow {
+    from {
+        background-position:
+            0 0, 0 0, 0 0, 0 0, 0 0,
+            0 0, 0 0, 0 0, 0 0, 0 0,
+            0 0, 0 0, 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position:
+            0 420px, 0 420px, 0 420px, 0 420px, 0 420px,
+            0 300px, 0 300px, 0 300px, 0 300px, 0 300px,
+            0 200px, 0 200px, 0 200px, 0 200px, 0 200px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-dark .workspace-split.mod-root::before { animation: none; }
+}

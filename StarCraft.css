@@ -1,0 +1,1033 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Exo+2:ital,wght@0,400;0,500;0,600;1,400&family=Rajdhani:wght@500;600;700&display=swap');
+
+/* ---------------------------------------------------------
+   1. PALETTE & VARIABLES
+--------------------------------------------------------- */
+
+.theme-dark {
+    /* Creep & chitine */
+    --void:          #06020a;
+    --void-light:    #0c0614;
+    --hull:          #1a0d24;
+    --hull-light:    #2a1438;
+    --hull-edge:     #47245e;
+    --steel:         #b9a3c9;
+
+    /* Ichor (vert acide) */
+    --ichor:           #9be83a;
+    --ichor-bright:    #d2ff7a;
+    --ichor-deep:      #3f6b12;
+
+    /* Braise (yeux de l'Essaim) */
+    --ember:        #ff9a3c;
+    --ember-bright: #ffc58a;
+
+    /* Factions & ressources */
+    --creep:   #a63dd6;
+    --terran:  #e2742b;
+    --alert:   #e0423a;
+    --mineral: #4aa8ff;
+    --gas:     #3fd07c;
+
+    /* Texte */
+    --ice: #ead9f5;
+
+    /* Soulignements de liens (interne = ichor, externe = braise) */
+    --bg-internal: rgba(155,232,58,.55);
+    --bg-external: rgba(255,154,60,.8);
+    --bg-ichor-25:   rgba(155,232,58,.25);
+
+    /* Polices */
+    --font-title:   "Teko", "Impact", "Arial Narrow", sans-serif;
+    --font-initial: "Teko", "Impact", sans-serif;
+    --font-text-theme:      "Exo 2", "Segoe UI", sans-serif;
+    --font-interface-theme: "Rajdhani", "Exo 2", -apple-system, "Segoe UI", sans-serif;
+    --font-monospace-theme: "Fira Code", "Cascadia Code", "Consolas", monospace;
+
+    --radius: 3px;
+    --shadow-soft:  0 8px 24px rgba(0,0,0,.65);
+    --shadow-inset: inset 0 0 14px rgba(0,0,0,.7);
+    --glow-ichor:     0 0 10px rgba(155,232,58,.45);
+    --line-height-normal: 1.65;
+    --file-line-width: 46rem;
+
+    /* Fonds Obsidian */
+    --background-primary:      var(--void);
+    --background-primary-alt:  #090410;
+    --background-secondary:    #0e0717;
+    --background-secondary-alt:#090410;
+    --background-modifier-border:       rgba(155,232,58,.16);
+    --background-modifier-border-hover: rgba(155,232,58,.38);
+    --background-modifier-border-focus: var(--ichor);
+    --background-modifier-hover:        rgba(155,232,58,.08);
+    --background-modifier-active-hover: rgba(155,232,58,.18);
+    --background-modifier-box-shadow:   rgba(0,0,0,.8);
+    --divider-color: rgba(155,232,58,.18);
+
+    /* Texte */
+    --text-normal:  var(--ice);
+    --text-muted:   #9a84ab;
+    --text-faint:   #66546f;
+    --text-accent:       var(--ichor);
+    --text-accent-hover: var(--ichor-bright);
+    --text-on-accent:    #06020a;
+    --text-selection:    rgba(155,232,58,.35);
+    --text-highlight-bg: rgba(255,154,60,.3);
+
+    /* Accents & interface */
+    --interactive-accent:       var(--ichor-deep);
+    --interactive-accent-hover: #558f18;
+    --interactive-normal:       var(--hull-light);
+    --interactive-hover:        var(--hull-edge);
+
+    /* Liens */
+    --link-color:                 var(--ice);
+    --link-color-hover:           #ffffff;
+    --link-decoration:            none;
+    --link-decoration-hover:      none;
+    --link-unresolved-color:      #6f8097;
+    --link-external-color:        var(--ice);
+    --link-external-color-hover:  #ffffff;
+
+    /* Titres */
+    --h1-font: var(--font-title);  --h1-color: var(--ichor-bright);       --h1-size: 2.5em;  --h1-weight: 700; --h1-line-height: 1.25;
+    --h2-font: var(--font-title);  --h2-color: var(--ember);        --h2-size: 2em;  --h2-weight: 700;
+    --h3-font: var(--font-title);  --h3-color: var(--ichor);              --h3-size: 1.6em; --h3-weight: 700;
+    --h4-font: var(--font-title);  --h4-color: var(--steel);            --h4-size: 1.3em; --h4-weight: 500;
+    --h5-font: var(--font-title);  --h5-color: var(--text-muted);       --h5-size: 1.15em;  --h5-weight: 500;
+    --h6-font: var(--font-title);  --h6-color: var(--text-faint);       --h6-size: 1.05em;   --h6-weight: 500;
+
+    /* Divers */
+    --hr-color: transparent;
+    --blockquote-border-color: var(--ichor);
+    --blockquote-background-color: transparent;
+    --blockquote-color: #cdb4e0;
+    --table-border-color: rgba(155,232,58,.2);
+    --table-header-background: rgba(8,3,14,.75);
+    --table-header-color: var(--ichor-bright);
+    --tag-color: var(--ichor);
+    --tag-background: rgba(155,232,58,.08);
+    --tag-border-color: rgba(155,232,58,.35);
+    --scrollbar-thumb-bg: rgba(155,232,58,.18);
+    --scrollbar-active-thumb-bg: rgba(155,232,58,.45);
+    --indentation-guide-color: rgba(155,232,58,.18);
+    --indentation-guide-color-active: rgba(155,232,58,.55);
+
+    /* Cases à cocher */
+    --checkbox-radius: 2px;
+    --checkbox-size: 18px;
+    --checkbox-color: var(--ichor);
+    --checkbox-color-hover: var(--ichor-bright);
+    --checkbox-border-color: var(--steel);
+    --checkbox-marker-color: var(--void);
+    --checklist-done-decoration: line-through;
+    --checklist-done-color: var(--text-faint);
+
+    /* Code : ichor, braise, carapace pourpre */
+    --code-background: #0d0716;
+    --code-normal:      #c7b3d6;
+    --code-comment:     #6d5a80;
+    --code-function:    #ffc58a;
+    --code-important:   #ff9a3c;
+    --code-keyword:     #c46df0;
+    --code-operator:    #b48fd0;
+    --code-property:    #b6f06a;
+    --code-punctuation: #8b73a0;
+    --code-string:      #ffb36b;
+    --code-tag:         #c46df0;
+    --code-value:       #ff9a3c;
+
+    /* Veines de creep discrètes (remplace la grille hexagonale) */
+    --creep-veins: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='none' stroke='%23a63dd6' stroke-opacity='.11' stroke-width='1.2' stroke-linecap='round'><path d='M10 50 C50 10 80 80 130 55 S200 20 232 62'/><path d='M130 55 C140 100 110 130 150 170 S190 210 170 232'/><path d='M40 130 C70 150 60 200 100 215'/><path d='M150 170 C190 160 210 130 232 140'/><path d='M130 55 C120 30 135 15 128 4'/></g><g fill='%23a63dd6' fill-opacity='.12'><circle cx='130' cy='55' r='3'/><circle cx='150' cy='170' r='3'/><circle cx='40' cy='130' r='2'/><circle cx='100' cy='215' r='1.6'/></g></svg>");
+}
+
+/* ---------------------------------------------------------
+   2. FOND : VIDE, TRAME, NÉBULEUSE
+--------------------------------------------------------- */
+
+.theme-dark .workspace-leaf-content[data-type="markdown"],
+.theme-dark .workspace-leaf-content[data-type="empty"] {
+    background:
+        var(--creep-veins),
+        radial-gradient(ellipse 70% 50% at 100% 0%, rgba(200,70,230,.14) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 45% at 0% 100%, rgba(120,200,40,.08) 0%, transparent 70%),
+        linear-gradient(170deg, var(--void) 0%, #100722 55%, #1a0b32 100%);
+}
+
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-editor,
+.theme-dark .cm-scroller {
+    background: transparent;
+}
+
+.theme-dark .titlebar,
+.theme-dark .workspace-ribbon.is-collapsed {
+    background-color: var(--background-primary-alt);
+}
+
+.theme-dark .view-header {
+    background: linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,0));
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.theme-dark .view-header-icon,
+.theme-dark .workspace-leaf.mod-active .view-header-title {
+    color: var(--ichor);
+}
+
+.theme-dark .view-header-title { font-family: var(--font-interface-theme); letter-spacing: .06em; }
+.theme-dark .titlebar-text { color: var(--ichor); }
+
+.theme-dark .notice {
+    background-color: var(--background-primary-alt);
+    color: var(--ichor-bright);
+    border: 1px solid var(--background-modifier-border-hover);
+    box-shadow: var(--glow-ichor);
+}
+
+/* Barres de défilement arrondies */
+::-webkit-scrollbar { width: .6rem; height: .6rem; }
+::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb-bg); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-active-thumb-bg); }
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece { background: var(--background-secondary); }
+
+/* ---------------------------------------------------------
+   3. BARRES LATÉRALES, ONGLETS, BARRE D'ÉTAT
+--------------------------------------------------------- */
+
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split,
+.theme-dark .workspace-ribbon {
+    box-shadow: var(--shadow-inset);
+}
+
+.theme-dark .nav-file-title,
+.theme-dark .nav-folder-title {
+    font-family: var(--font-interface-theme);
+    font-weight: 500;
+    letter-spacing: .03em;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    color: var(--text-muted);
+}
+
+body:not(.is-grabbing).theme-dark .nav-file-title:hover,
+body:not(.is-grabbing).theme-dark .nav-folder-title:hover {
+    color: var(--ichor-bright);
+    background: var(--background-modifier-hover);
+    border-color: var(--background-modifier-border-hover);
+}
+
+.theme-dark .nav-file-title.is-active,
+.theme-dark .nav-folder-title.is-active {
+    color: var(--ichor-bright);
+    background: linear-gradient(90deg, rgba(155,232,58,.22), rgba(155,232,58,0));
+    border-color: var(--bg-ichor-25);
+    box-shadow: inset 2px 0 0 var(--ichor);
+}
+
+.theme-dark .nav-folder-collapse-indicator { color: var(--ember); }
+
+/* Racine de l'arborescence */
+.theme-dark .nav-folder.mod-root > .nav-folder-title { color: var(--ember); }
+
+/* Sac d'œufs (dossiers) : sphère éteinte, luisante quand ouverte */
+.theme-dark .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border: 1.5px solid var(--steel);
+    border-radius: 50%;
+    vertical-align: 0;
+    background: transparent;
+}
+
+.theme-dark .nav-folder:not(.is-collapsed) > .nav-folder-title .nav-folder-title-content::before {
+    border-color: var(--ichor);
+    background: var(--ichor);
+    box-shadow: 0 0 7px rgba(155,232,58,.7);
+}
+
+/* Fichiers : griffe de chitine */
+.theme-dark .nav-file-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+    margin-right: 8px;
+    background: var(--ember);
+    opacity: .75;
+    clip-path: polygon(50% 0, 100% 100%, 50% 75%, 0 100%);
+    vertical-align: -1px;
+}
+
+.theme-dark .nav-file-title.is-active .nav-file-title-content::before {
+    background: var(--ichor-bright);
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(155,232,58,.8));
+}
+
+/* Icônes du dock et onglets : discrets au repos, allumés au survol */
+.theme-dark .side-dock-ribbon-tab,
+.theme-dark .side-dock-ribbon-action,
+.theme-dark .workspace-ribbon-collapse-btn,
+.theme-dark .workspace-tab-header {
+    transition: all 350ms ease-in-out;
+    opacity: .55;
+    cursor: pointer;
+}
+
+.theme-dark .side-dock-ribbon-tab:hover,
+.theme-dark .side-dock-ribbon-action:hover,
+.theme-dark .workspace-ribbon-collapse-btn:hover,
+.theme-dark .workspace-tab-header:hover {
+    opacity: 1;
+    color: var(--ichor-bright);
+}
+
+.theme-dark .workspace-tab-header.is-active {
+    opacity: 1;
+    color: var(--ichor-bright);
+    box-shadow: inset 0 -2px 0 var(--ichor), 0 6px 12px -8px rgba(155,232,58,.8);
+}
+
+/* Barre d'état : s'efface jusqu'au survol */
+.theme-dark .status-bar {
+    background: #07030c;
+    border-top: 1px solid var(--divider-color);
+    border-top-left-radius: 8px;
+    color: var(--text-faint);
+    opacity: .4;
+    transition: opacity .5s;
+}
+
+.theme-dark .status-bar:hover { opacity: 1; transition: opacity .2s; }
+
+/* ---------------------------------------------------------
+   4. TEXTE & TITRES : l'interface du Nexus
+--------------------------------------------------------- */
+
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-s-obsidian {
+    font-family: var(--font-text-theme);
+    font-size: 1.05em;
+}
+
+.theme-dark .markdown-rendered h1,
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4,
+.theme-dark .markdown-rendered h5,
+.theme-dark .markdown-rendered h6 {
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(155,232,58,.25), 0 2px 10px rgba(0,0,0,.9);
+}
+
+/* H1 : filet d'ichor qui s'estompe */
+.theme-dark .markdown-rendered h1 {
+    padding-bottom: .4em;
+    margin-bottom: .7em;
+    background: linear-gradient(90deg, var(--ichor) 0%, rgba(155,232,58,0) 85%) bottom / 100% 2px no-repeat;
+}
+
+/* H2 à H6 : filet de braise qui s'estompe dans le creep */
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4,
+.theme-dark .markdown-rendered h5,
+.theme-dark .markdown-rendered h6,
+.theme-dark .HyperMD-header.HyperMD-header-2,
+.theme-dark .HyperMD-header.HyperMD-header-3,
+.theme-dark .HyperMD-header.HyperMD-header-4,
+.theme-dark .HyperMD-header.HyperMD-header-5,
+.theme-dark .HyperMD-header.HyperMD-header-6 {
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, var(--ember), rgba(6,2,10,0) 65%);
+}
+
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4 {
+    padding-bottom: .25em;
+}
+
+/* Signes # discrets en édition */
+.theme-dark .cm-formatting.cm-formatting-header.cm-header {
+    color: var(--ichor);
+    opacity: .45;
+}
+
+/* Lettrine : la grande initiale lumineuse */
+.theme-dark .markdown-preview-view .el-h1 + .el-p > p::first-letter {
+    font-family: var(--font-initial);
+    font-weight: 700;
+    font-size: 4em;
+    float: left;
+    line-height: .9;
+    padding: .06em .14em 0 0;
+    color: var(--ichor-bright);
+    text-shadow: 0 0 16px rgba(155,232,58,.7);
+}
+
+/* Gras : dégradé ichor → blanc, comme une griffe luisante */
+.theme-dark strong,
+.theme-dark .cm-strong {
+    font-weight: 600;
+    color: var(--ichor-bright);
+    background-image: linear-gradient(62deg, var(--ichor) 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.theme-dark strong kbd,
+.theme-dark .cm-strong kbd { -webkit-text-fill-color: initial; }
+
+/* Italique : reflet de carapace */
+.theme-dark em,
+.theme-dark .cm-em { color: #d6b0f0; }
+
+.theme-dark mark,
+.theme-dark .cm-s-obsidian span.cm-highlight {
+    background: linear-gradient(transparent 55%, rgba(255,154,60,.4) 55%);
+    color: inherit;
+}
+
+/* Séparateur : filet d'acier et cristal central */
+.theme-dark .markdown-rendered hr,
+.theme-dark .cm-line hr {
+    position: relative;
+    height: 0;
+    margin-block: 3em;
+    border: none;
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, transparent, var(--ichor), transparent);
+}
+
+.theme-dark .markdown-rendered hr::after,
+.theme-dark .cm-line hr::after {
+    content: "✸";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    padding: 0 .6rem;
+    color: var(--ember);
+    background-color: #080410;
+    font-size: .8rem;
+    text-shadow: 0 0 8px rgba(255,154,60,.7);
+}
+
+/* ---------------------------------------------------------
+   5. LIENS : soulignement plein qui se remplit au survol
+--------------------------------------------------------- */
+
+.theme-dark .markdown-rendered a.internal-link,
+.theme-dark .markdown-rendered a.external-link,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
+    color: var(--text-normal);
+    -webkit-text-fill-color: var(--text-normal);
+    text-decoration: none;
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    background-size: 5px 5px;
+    transition: background 350ms ease-in-out;
+}
+
+.theme-dark .markdown-rendered a.internal-link,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline {
+    background-image: linear-gradient(var(--bg-internal), var(--bg-internal));
+}
+
+.theme-dark .markdown-rendered a.external-link,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline {
+    background-image: linear-gradient(var(--bg-external), var(--bg-external));
+}
+
+.theme-dark .markdown-rendered a.internal-link:hover,
+.theme-dark .markdown-rendered a.external-link:hover,
+.theme-dark .cm-s-obsidian span.cm-hmd-internal-link .cm-underline:hover,
+.theme-dark .cm-s-obsidian span.cm-link:not(.cm-formatting-link) .cm-underline:hover {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    background-size: 4px 50px;
+}
+
+.theme-dark .markdown-rendered a.internal-link.is-unresolved { opacity: .7; }
+
+/* Marques de syntaxe atténuées en édition */
+.theme-dark .cm-s-obsidian span.cm-formatting-link { color: var(--text-faint) !important; opacity: .3; }
+.theme-dark .cm-url { color: var(--text-faint) !important; opacity: .45; }
+.theme-dark .cm-formatting-image { color: var(--ichor) !important; opacity: .7; }
+
+/* ---------------------------------------------------------
+   6. TAGS : un sceau de couleur par sujet
+   Utilise #terran, #protoss, #zerg, #mission, #gaz, #mineraux
+   (les équivalents Obsidianite #todo, #notes… restent valables).
+--------------------------------------------------------- */
+
+.theme-dark a.tag {
+    font-family: var(--font-interface-theme);
+    font-style: normal;
+    font-size: .9rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    border-radius: 2px;
+    padding: .05em .6em;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.theme-dark a.tag:hover {
+    border-color: var(--ichor);
+    color: var(--ichor-bright);
+    text-decoration: underline;
+    text-decoration-color: var(--ichor);
+}
+
+.theme-dark h1 a.tag, .theme-dark h2 a.tag, .theme-dark h3 a.tag,
+.theme-dark h4 a.tag, .theme-dark h5 a.tag, .theme-dark h6 a.tag { font-size: inherit; }
+
+/* Mission / à faire : alerte */
+a.tag[href*='#mission'], a.tag[href*='#todo'] { background-color: #7d1e1a; border-color: #b12f29; color: #ffe6e3; }
+.cm-s-obsidian span.cm-tag-mission:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-todo:not(.cm-formatting-hashtag) { color: #ff7a72; }
+
+/* Zerg / brouillon : carapace pourpre */
+a.tag[href*='#zerg'], a.tag[href*='#working-draft'] { background-color: #4c1a6b; border-color: #7a2ba6; color: #f2e0ff; }
+.cm-s-obsidian span.cm-tag-zerg:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-working-draft:not(.cm-formatting-hashtag) { color: #c46df0; }
+
+/* Gaz / notes : vespène */
+a.tag[href*='#gaz'], a.tag[href*='#notes'] { background-color: #1d5a39; border-color: #2b8a57; color: #e2fbec; }
+.cm-s-obsidian span.cm-tag-gaz:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-notes:not(.cm-formatting-hashtag) { color: #5fe79c; }
+
+/* Minerais / savoir : cristaux bleus */
+a.tag[href*='#mineraux'], a.tag[href*='#knowledge'] { background-color: #164a82; border-color: #2a72bd; color: #e3f1ff; }
+.cm-s-obsidian span.cm-tag-mineraux:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-knowledge:not(.cm-formatting-hashtag) { color: #6fbaff; }
+
+/* Terran / écriture : acier et flamme */
+a.tag[href*='#terran'], a.tag[href*='#writing'] { background-color: #8a4413; border-color: #c2621d; color: #ffeedd; }
+.cm-s-obsidian span.cm-tag-terran:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-writing:not(.cm-formatting-hashtag) { color: #f28d4a; }
+
+/* Protoss / idées : or d'Aiur */
+a.tag[href*='#protoss'], a.tag[href*='#ideas'] { background-color: #d9a83f; border-color: #f0c766; color: #1a1305; }
+.cm-s-obsidian span.cm-tag-protoss:not(.cm-formatting-hashtag),
+.cm-s-obsidian span.cm-tag-ideas:not(.cm-formatting-hashtag) { color: #ffc58a; }
+
+.cm-s-obsidian span.cm-hashtag { font-style: normal; }
+.cm-s-obsidian span.cm-formatting-hashtag { color: var(--text-faint); }
+
+/* ---------------------------------------------------------
+   7. LISTES & CASES À COCHER
+--------------------------------------------------------- */
+
+.theme-dark .cm-s-obsidian span.cm-formatting-list { color: var(--ember); }
+
+.theme-dark .markdown-source-view.mod-cm6 .cm-indent::before,
+.theme-dark .markdown-source-view.mod-cm6 .cm-active-indent::before { transition: opacity 400ms ease-in-out; }
+
+.theme-dark .list-bullet::after { background-color: var(--ember); }
+.theme-dark .markdown-rendered ul > li::marker,
+.theme-dark .markdown-rendered ol > li::marker { color: var(--ember); }
+
+/* Case cochée : remplissage ichor et impulsion */
+.theme-dark input[type="checkbox"]:checked {
+    animation: sc2-pop 300ms ease-out;
+    box-shadow: 0 0 8px rgba(155,232,58,.6);
+}
+
+@keyframes sc2-pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(.82); }
+    100% { transform: scale(1); }
+}
+
+/* ---------------------------------------------------------
+   8. CITATIONS : panneau organique à bord denté
+--------------------------------------------------------- */
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote,
+.theme-dark .markdown-rendered blockquote {
+    position: relative;
+    padding: 1rem 2rem 1rem 3rem;
+    margin-bottom: 1.6em;
+    font-style: italic;
+    border: none;
+    border-left: 3px solid var(--ichor);
+    border-radius: 0;
+    background: linear-gradient(135deg, rgba(155,232,58,.12), rgba(6,2,10,.7));
+}
+
+/* Bord droit en dents de carapace sur le rendu de lecture */
+.theme-dark .markdown-rendered blockquote {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 25%, 100% 50%, calc(100% - 9px) 75%, 100% 100%, 0 100%);
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote::before,
+.theme-dark .markdown-rendered blockquote::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 60%;
+    background: linear-gradient(90deg, rgba(155,232,58,.8), transparent);
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote::after,
+.theme-dark .markdown-rendered blockquote::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 25%;
+    background: linear-gradient(90deg, rgba(255,154,60,.8), transparent);
+}
+
+.theme-dark .markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote + .HyperMD-quote::before,
+.theme-dark .HyperMD-quote.HyperMD-quote-2::before,
+.theme-dark .HyperMD-quote.HyperMD-quote-3::before { display: none; }
+
+/* Guillemet luisant en marge */
+.theme-dark .markdown-rendered blockquote p:first-of-type { position: relative; }
+.theme-dark .markdown-rendered blockquote p:first-of-type::before {
+    content: "\201C";
+    position: absolute;
+    top: -.15rem;
+    left: -2rem;
+    font-family: var(--font-initial);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--ichor);
+    text-shadow: var(--glow-ichor);
+}
+
+/* ---------------------------------------------------------
+   9. TABLEAUX, CODE
+--------------------------------------------------------- */
+
+.theme-dark .markdown-preview-view table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--table-border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: rgba(10,4,18,.75);
+    box-shadow: var(--shadow-soft);
+}
+
+.theme-dark .markdown-preview-view th {
+    font-family: var(--font-title);
+    font-size: 1.05em;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--table-header-color);
+    background: var(--table-header-background);
+    border-bottom: 1px solid var(--ichor);
+}
+
+.theme-dark .markdown-preview-view td { border-color: rgba(155,232,58,.1); }
+.theme-dark .markdown-preview-view tbody tr:nth-child(even) td { background: rgba(155,232,58,.03); }
+
+.theme-dark .markdown-rendered pre {
+    position: relative;
+    border: 1px solid var(--divider-color);
+    border-left: 3px solid var(--ember);
+    border-radius: var(--radius);
+}
+
+.theme-dark .markdown-rendered :not(pre) > code,
+.theme-dark .cm-s-obsidian span.cm-inline-code {
+    border-radius: 2px;
+    padding: 0 5px;
+    background-color: rgba(155,232,58,.07);
+    color: var(--code-property);
+}
+
+.theme-dark .markdown-rendered img { border-radius: 4px; }
+
+/* Pastille de langage en haut à droite des blocs de code */
+.theme-dark pre[class*="language-"]::before {
+    content: "";
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+    z-index: 10;
+    padding: .1em .8em;
+    border-radius: 8px 2px 8px 2px;
+    background: rgba(8,3,12,.92);
+    border: 1px solid var(--divider-color);
+    color: var(--ichor);
+    font-family: var(--font-title);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+pre[class$="javascript"]::before, pre[class$="js"]::before   { content: "JavaScript"; }
+pre[class$="typescript"]::before, pre[class$="ts"]::before   { content: "TypeScript"; }
+pre[class$="python"]::before   { content: "Python"; }
+pre[class$="html"]::before     { content: "HTML"; }
+pre[class$="css"]::before      { content: "CSS"; }
+pre[class$="json"]::before     { content: "JSON"; }
+pre[class$="shell"]::before, pre[class$="bash"]::before { content: "Shell"; }
+pre[class$="yaml"]::before     { content: "YAML"; }
+
+/* Front-matter (propriétés) */
+.theme-dark .cm-s-obsidian span.cm-def,
+.theme-dark .cm-s-obsidian span.cm-atom { color: var(--text-faint); }
+.theme-dark .cm-s-obsidian span.cm-meta { color: var(--ember); }
+.theme-dark .cm-s-obsidian span.cm-string { color: var(--code-string); }
+
+/* ---------------------------------------------------------
+   10. CALLOUTS : factions, mission, transmissions
+   Usage : > [!zerg] Titre   /   > [!essaim] Conscience collective
+--------------------------------------------------------- */
+
+.theme-dark .callout {
+    --callout-border-width: 1px;
+    --callout-border-opacity: .3;
+    --callout-padding: .8em 1em;
+    --callout-radius: var(--radius);
+    --callout-title-padding: 0 0 .3em;
+    border-left: 3px solid rgb(var(--callout-color));
+    background-color: rgba(var(--callout-color), .07);
+    box-shadow: var(--shadow-soft);
+}
+
+.theme-dark .callout-title {
+    font-family: var(--font-title);
+    font-size: 1.15em;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+/* Les trois races */
+.callout[data-callout="zerg"]    { --callout-color: 166,61,214;  --callout-icon: lucide-bug; }
+.callout[data-callout="terran"]  { --callout-color: 226,116,43;  --callout-icon: lucide-cog; }
+.callout[data-callout="protoss"] { --callout-color: 227,177,75;  --callout-icon: lucide-gem; }
+
+/* Interface de l'Essaim */
+.callout[data-callout="essaim"]        { --callout-color: 200,70,230;  --callout-icon: lucide-biohazard; }
+.callout[data-callout="evolution"]     { --callout-color: 155,232,58;  --callout-icon: lucide-dna; }
+.callout[data-callout="mission"]       { --callout-color: 255,154,60;  --callout-icon: lucide-crosshair; }
+.callout[data-callout="transmission"]  { --callout-color: 190,110,240; --callout-icon: lucide-radio-tower; }
+.callout[data-callout="intel"]         { --callout-color: 120,200,90;  --callout-icon: lucide-scan-eye; }
+.callout[data-callout="alerte"]        { --callout-color: 224,66,58;   --callout-icon: lucide-skull; }
+
+/* Callouts natifs recolorés */
+.callout[data-callout="note"],
+.callout[data-callout="info"]    { --callout-color: 155,232,58; }
+.callout[data-callout="tip"]     { --callout-color: 255,154,60; }
+.callout[data-callout="success"] { --callout-color: 63,208,124; }
+.callout[data-callout="warning"] { --callout-color: 226,116,43; }
+.callout[data-callout="danger"],
+.callout[data-callout="bug"]     { --callout-color: 224,66,58; }
+.callout[data-callout="quote"]   { --callout-color: 150,130,176; }
+
+/* ---------------------------------------------------------
+   11. BOUTONS, MENUS, MODALES
+--------------------------------------------------------- */
+
+.theme-dark button.mod-cta {
+    font-family: var(--font-title);
+    font-size: 1.05em;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    border: 1px solid var(--ichor);
+    border-radius: 2px;
+    background: linear-gradient(180deg, #558f18, var(--ichor-deep));
+    color: #ffffff;
+    box-shadow: var(--glow-ichor);
+    clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%);
+}
+
+.theme-dark .checkbox-container.is-enabled { background-color: var(--ichor-deep); }
+
+.theme-dark .modal,
+.theme-dark .menu,
+.theme-dark .prompt,
+.theme-dark .suggestion-container {
+    background: var(--creep-veins), linear-gradient(180deg, #1a0d2a, #0a0512);
+    border: 1px solid var(--background-modifier-border-hover);
+    box-shadow: var(--shadow-soft), 0 0 18px rgba(155,232,58,.12);
+}
+
+.theme-dark .suggestion-item.is-selected {
+    background: rgba(155,232,58,.2);
+    color: var(--ichor-bright);
+}
+
+.theme-dark .pane-list-item:hover .pane-list-item-ending-flair {
+    background-color: var(--background-secondary);
+    color: var(--ichor);
+}
+
+/* ---------------------------------------------------------
+   12. FINITIONS
+--------------------------------------------------------- */
+
+::selection { background: rgba(155,232,58,.4); color: #fff; }
+
+.theme-dark :focus-visible {
+    outline: 1px solid var(--ichor);
+    outline-offset: 1px;
+}
+
+/* ---------------------------------------------------------
+   13. DÉGRADÉS DE BOÎTES
+   Zone principale : noir -> creep pourpre
+   Zones latérales : noir -> vert de ruche
+   Les dégradés sont posés sur les CONTENEURS (.workspace-split),
+   et tout ce qui les recouvre est rendu transparent, car Obsidian
+   peint ces éléments en opaque. Ajuste les couleurs de fin pour
+   régler l'intensité.
+--------------------------------------------------------- */
+
+.theme-dark {
+    --main-grad-start: #06020a;   /* vide */
+    --main-grad-mid:   #12082a;
+    --main-grad-end:   #3a1260;   /* creep pourpre */
+
+    --side-grad-start: #06020a;   /* vide */
+    --side-grad-mid:   #10091c;
+    --side-grad-end:   #24421a;   /* vert de ruche */
+
+    --tab-container-background: transparent;
+}
+
+/* --- Boîte principale : noir -> creep --- */
+.theme-dark .workspace-split.mod-root {
+    background:
+        var(--creep-veins),
+        linear-gradient(160deg,
+            var(--main-grad-start) 0%,
+            var(--main-grad-start) 55%,
+            var(--main-grad-mid) 80%,
+            var(--main-grad-end) 100%) !important;
+}
+
+.theme-dark .workspace-split.mod-root .workspace-tabs,
+.theme-dark .workspace-split.mod-root .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-root .workspace-leaf,
+.theme-dark .workspace-split.mod-root .workspace-leaf-content,
+.theme-dark .workspace-split.mod-root .view-content,
+.theme-dark .workspace-split.mod-root .markdown-reading-view,
+.theme-dark .workspace-split.mod-root .markdown-source-view,
+.theme-dark .workspace-split.mod-root .markdown-preview-view,
+.theme-dark .workspace-split.mod-root .cm-editor,
+.theme-dark .workspace-split.mod-root .cm-scroller {
+    background: transparent !important;
+}
+
+/* --- Boîtes secondaires : noir -> ruche --- */
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split,
+.theme-dark .workspace-ribbon {
+    background:
+        var(--creep-veins),
+        linear-gradient(180deg,
+            var(--side-grad-start) 0%,
+            var(--side-grad-start) 60%,
+            var(--side-grad-mid) 82%,
+            var(--side-grad-end) 100%) !important;
+}
+
+.theme-dark .workspace-split.mod-left-split .workspace-tabs,
+.theme-dark .workspace-split.mod-left-split .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-left-split .workspace-leaf,
+.theme-dark .workspace-split.mod-left-split .workspace-leaf-content,
+.theme-dark .workspace-split.mod-left-split .view-content,
+.theme-dark .workspace-split.mod-left-split .nav-files-container,
+.theme-dark .workspace-split.mod-left-split .nav-header,
+.theme-dark .workspace-split.mod-right-split .workspace-tabs,
+.theme-dark .workspace-split.mod-right-split .workspace-tab-header-container,
+.theme-dark .workspace-split.mod-right-split .workspace-leaf,
+.theme-dark .workspace-split.mod-right-split .workspace-leaf-content,
+.theme-dark .workspace-split.mod-right-split .view-content,
+.theme-dark .workspace-sidedock-vault-profile,
+.theme-dark .workspace-drawer-vault-actions {
+    background: transparent !important;
+}
+
+.theme-dark .workspace-sidedock-vault-profile {
+    border-top: 1px solid var(--divider-color);
+}
+
+/* ---------------------------------------------------------
+   14. CIEL ÉTOILÉ & PLUIE D'ÉTOILES FILANTES
+   CSS pur, aucun script, ne bloque pas les clics.
+
+   · ::before de la zone principale = champ d'étoiles qui
+     scintille et dérive lentement (trois couches de profondeur).
+   · ::after = averse de météores : trois couches de traînées
+     diagonales (grosses et rapides -> fines et lentes), toutes
+     dans le même sens comme un vrai essaim. Chaque traînée est
+     dessinée en SVG et la couche glisse exactement d'une tuile
+     le long de la pente (4:3), ce qui donne une boucle sans saut.
+   · Une onde d'intensité fait monter et retomber l'averse.
+   · Le tout est placé DERRIÈRE le texte (z-index -1) : lisibilité
+     intacte, les blocs opaques (code, callouts) restent nets.
+
+   Réglages :
+     --meteor-opacity  (0 = pas d'étoiles filantes)
+     --meteor-speed    (durée d'un passage : plus petit = plus rapide)
+     --star-opacity    (0 = pas d'étoiles fixes)
+--------------------------------------------------------- */
+
+.theme-dark {
+    --meteor-opacity: .95;
+    --meteor-speed: 4.5s;
+    --star-opacity: .9;
+    --star-color: 234, 217, 245;
+    --star-ichor: 155, 232, 58;
+    --star-ember: 255, 197, 138;
+}
+
+.theme-dark .workspace-split.mod-root {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+/* --- Étoiles fixes --- */
+.theme-dark .workspace-split.mod-root::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--star-opacity);
+    background:
+        /* étoiles proches */
+        radial-gradient(circle 1.6px at 60px 80px,   rgba(var(--star-color), .95) 40%, transparent),
+        radial-gradient(circle 1.6px at 310px 190px, rgba(var(--star-ichor), .95) 40%, transparent),
+        radial-gradient(circle 1.6px at 180px 260px, rgba(var(--star-ember), .9) 40%, transparent),
+        radial-gradient(circle 1.6px at 370px 40px,  rgba(var(--star-color), .95) 40%, transparent),
+        /* étoiles moyennes */
+        radial-gradient(circle 1.2px at 40px 150px,  rgba(var(--star-color), .75) 40%, transparent),
+        radial-gradient(circle 1.2px at 230px 60px,  rgba(var(--star-ichor), .75) 40%, transparent),
+        radial-gradient(circle 1.2px at 120px 180px, rgba(var(--star-color), .75) 40%, transparent),
+        radial-gradient(circle 1.2px at 260px 140px, rgba(var(--star-ember), .7) 40%, transparent),
+        /* poussière d'étoiles lointaine */
+        radial-gradient(circle 0.9px at 30px 30px,   rgba(var(--star-color), .55) 40%, transparent),
+        radial-gradient(circle 0.9px at 110px 90px,  rgba(var(--star-color), .55) 40%, transparent),
+        radial-gradient(circle 0.9px at 70px 130px,  rgba(var(--star-ichor), .5) 40%, transparent),
+        radial-gradient(circle 0.9px at 150px 40px,  rgba(var(--star-color), .55) 40%, transparent);
+    background-size:
+        420px 300px, 420px 300px, 420px 300px, 420px 300px,
+        300px 220px, 300px 220px, 300px 220px, 300px 220px,
+        180px 160px, 180px 160px, 180px 160px, 180px 160px;
+    background-repeat: repeat;
+    animation:
+        sc2-star-drift 260s linear infinite,
+        sc2-twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes sc2-star-drift {
+    from {
+        background-position:
+            0 0, 0 0, 0 0, 0 0,
+            0 0, 0 0, 0 0, 0 0,
+            0 0, 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position:
+            -420px 300px, -420px 300px, -420px 300px, -420px 300px,
+            -300px 220px, -300px 220px, -300px 220px, -300px 220px,
+            -180px 160px, -180px 160px, -180px 160px, -180px 160px;
+    }
+}
+
+@keyframes sc2-twinkle {
+    from { opacity: calc(var(--star-opacity) * .55); }
+    to   { opacity: var(--star-opacity); }
+}
+
+/* --- Averse d'étoiles filantes --- */
+.theme-dark .workspace-split.mod-root::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--meteor-opacity);
+    background-image:
+        /* couche A : grosses comètes d'ichor, tuile 1000x750 */
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='750'><defs><linearGradient id='t'><stop offset='0' stop-color='%239be83a' stop-opacity='0'/><stop offset='1' stop-color='%23f3ffd6'/></linearGradient></defs><g stroke='url(%23t)' stroke-linecap='round' opacity='.28' stroke-width='6'><line x1='80' y1='60' x2='216' y2='162'/><line x1='560' y1='110' x2='696' y2='212'/><line x1='300' y1='420' x2='436' y2='522'/><line x1='760' y1='520' x2='896' y2='622'/></g><g stroke='url(%23t)' stroke-linecap='round' stroke-width='2'><line x1='80' y1='60' x2='216' y2='162'/><line x1='560' y1='110' x2='696' y2='212'/><line x1='300' y1='420' x2='436' y2='522'/><line x1='760' y1='520' x2='896' y2='622'/></g><g fill='%23ffffff'><circle cx='216' cy='162' r='2.2'/><circle cx='696' cy='212' r='2.2'/><circle cx='436' cy='522' r='2.2'/><circle cx='896' cy='622' r='2.2'/></g></svg>"),
+        /* couche B : comètes de braise, tuile 640x480 */
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><defs><linearGradient id='t'><stop offset='0' stop-color='%23ff9a3c' stop-opacity='0'/><stop offset='1' stop-color='%23ffe6cf'/></linearGradient></defs><g stroke='url(%23t)' stroke-linecap='round' opacity='.25' stroke-width='5'><line x1='40' y1='300' x2='128' y2='366'/><line x1='330' y1='60' x2='418' y2='126'/><line x1='480' y1='330' x2='568' y2='396'/></g><g stroke='url(%23t)' stroke-linecap='round' stroke-width='1.5'><line x1='40' y1='300' x2='128' y2='366'/><line x1='330' y1='60' x2='418' y2='126'/><line x1='480' y1='330' x2='568' y2='396'/></g><g fill='%23ffffff'><circle cx='128' cy='366' r='1.7'/><circle cx='418' cy='126' r='1.7'/><circle cx='568' cy='396' r='1.7'/></g></svg>"),
+        /* couche C : fines traînées lointaines, tuile 480x360 */
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='360'><defs><linearGradient id='t'><stop offset='0' stop-color='%23ead9f5' stop-opacity='0'/><stop offset='1' stop-color='%23ffffff' stop-opacity='.9'/></linearGradient></defs><g stroke='url(%23t)' stroke-linecap='round' stroke-width='1'><line x1='60' y1='40' x2='116' y2='82'/><line x1='300' y1='200' x2='356' y2='242'/><line x1='150' y1='280' x2='206' y2='322'/><line x1='400' y1='60' x2='456' y2='102'/></g></svg>");
+    background-size: 1000px 750px, 640px 480px, 480px 360px;
+    background-repeat: repeat;
+    animation:
+        sc2-meteors var(--meteor-speed) linear infinite,
+        sc2-meteor-wave 14s ease-in-out infinite;
+}
+
+/* Chaque couche avance d'exactement une tuile le long de la pente 4:3 :
+   la boucle est invisible. La grosse couche est la plus rapide (parallaxe). */
+@keyframes sc2-meteors {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: 1000px 750px, 640px 480px, 480px 360px;
+    }
+}
+
+/* L'averse monte, culmine, puis s'apaise */
+@keyframes sc2-meteor-wave {
+    0%, 100% { opacity: calc(var(--meteor-opacity) * .3); }
+    50%      { opacity: var(--meteor-opacity); }
+}
+
+/* --- Ciel discret dans les barres latérales --- */
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split {
+    position: relative;
+    isolation: isolate;
+}
+
+.theme-dark .workspace-split.mod-left-split::before,
+.theme-dark .workspace-split.mod-right-split::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: calc(var(--star-opacity) * .6);
+    background:
+        radial-gradient(circle 1.2px at 40px 50px,  rgba(var(--star-color), .8) 40%, transparent),
+        radial-gradient(circle 1px at 160px 120px,  rgba(var(--star-ichor), .8) 40%, transparent),
+        radial-gradient(circle 0.9px at 90px 170px, rgba(var(--star-color), .6) 40%, transparent),
+        radial-gradient(circle 1px at 200px 20px,   rgba(var(--star-ember), .7) 40%, transparent);
+    background-size: 240px 200px;
+    animation: sc2-twinkle 6s ease-in-out infinite alternate;
+}
+
+/* Réduction des animations à la demande du système */
+@media (prefers-reduced-motion: reduce) {
+    .theme-dark *,
+    .theme-dark .workspace-split.mod-root::before,
+    .theme-dark .workspace-split.mod-root::after,
+    .theme-dark .workspace-split.mod-left-split::before,
+    .theme-dark .workspace-split.mod-right-split::before {
+        animation: none !important;
+        transition: none !important;
+    }
+}
